@@ -1,16 +1,28 @@
 import { isArray } from "@/utils";
 import { useState } from "react";
+import { ConfigProvider, DatePicker, Button } from "antd";
 import "./app.css";
+
+import dayjs from "dayjs";
+import "dayjs/locale/zh-cn";
+import zhCN from "antd/locale/zh_CN";
+import "antd/dist/reset.css";
+
+dayjs.locale("zh-cn");
 
 const App = () => {
 	const [arr] = useState([1, 2, 3]);
+	const handleChange = (date: any) => {
+		console.log(date);
+	};
 	return (
-		<div className="bgRed">
-			<h1>Hello fff</h1>
-			<h2>
-				{JSON.stringify(arr)}是不是数组？：{isArray(arr) ? "是" : "否"}
-			</h2>
-		</div>
+		<ConfigProvider locale={zhCN}>
+			<div>
+				<Button type="primary">按钮</Button>
+				<DatePicker onChange={handleChange} />
+				{isArray(arr) && arr.map((item) => <div key={item}>{item}</div>)}
+			</div>
+		</ConfigProvider>
 	);
 };
 
